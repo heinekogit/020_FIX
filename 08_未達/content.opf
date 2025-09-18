@@ -1,0 +1,12 @@
+<manifest>
+    <item id="p-toc" href="p-toc.xhtml" media-type="application/xhtml+xml"/>
+    <item id="css" href="CSS/style.css" media-type="text/css"/>
+    <item id="toc-img" href="images/toc.jpg" media-type="image/jpeg"/>
+</manifest>
+
+<spine>
+    <itemref idref="p-toc"/>
+    <itemref idref="chapter1"/>
+    <itemref idref="chapter2"/>
+    <itemref idref="chapter3"/>
+</spine>

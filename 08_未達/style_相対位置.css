@@ -1,0 +1,26 @@
+body {
+    position: relative;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.toc-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.link {
+    position: absolute;
+    display: block;
+    width: 20vw;  /* ビューポート幅の20% */
+    height: 5vh;  /* ビューポート高さの5% */
+    background: rgba(255, 0, 0, 0.3); /* テスト時のみ表示、完成時は transparent */
+    text-indent: -9999px; /* 見えない */
+}
+
+/* 各章のリンク位置（目次画像に合わせて調整） */
+.chap1 { top: 20vh; left: 10vw; } /* ビューポートの20%の高さ、10%の幅 */
+.chap2 { top: 30vh; left: 10vw; } /* ビューポートの30%の高さ、10%の幅 */
+.chap3 { top: 40vh; left: 10vw; } /* ビューポートの40%の高さ、10%の幅 */

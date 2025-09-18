@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>目次</title>
+    <style>
+        /* ページ全体のスタイル */
+        body {
+            position: relative; /* 親要素として基準 */
+            margin: 0;
+            width: 100vw; /* ビューポート幅いっぱい */
+            height: 100vh; /* ビューポート高さいっぱい */
+            overflow: hidden; /* 余計なスクロールを防ぐ */
+        }
+
+        /* 目次画像 */
+        .toc-image {
+            width: 100%; /* 画面いっぱいに広げる */
+            height: auto;
+            display: block;
+        }
+
+        /* 透明なリンク領域 */
+        .link {
+            position: absolute;
+            display: block;
+            width: 200px; /* リンクの幅 */
+            height: 50px; /* リンクの高さ */
+            background: rgba(255, 0, 0, 0.3); /* テスト用（最終的には `transparent` にする） */
+            text-indent: -9999px; /* テキストを非表示 */
+        }
+
+        /* 各章のリンク座標（目次画像に合わせて調整） */
+        .chap1 { top: 200px; left: 100px; }
+        .chap2 { top: 300px; left: 100px; }
+        .chap3 { top: 400px; left: 100px; }
+    </style>
+</head>
+<body>
+    <!-- 目次画像 -->
+    <img src="toc.jpg" class="toc-image" alt="目次" />
+
+    <!-- 透明なリンク -->
+    <a href="chapter1.xhtml" class="link chap1">第1章</a>
+    <a href="chapter2.xhtml" class="link chap2">第2章</a>
+    <a href="chapter3.xhtml" class="link chap3">第3章</a>
+</body>
+</html>
