@@ -22,6 +22,8 @@ use Text::CSV;
 use DateTime;
 use DateTime::Format::ISO8601;
 
+our %opt;
+
 
     my @img_list;
     my @xhtml_list;
@@ -350,6 +352,14 @@ close(IN_SHOSI);
    				 
 	&make_spine;
 
+   	 my ($uuid, $modified);
+   	 if (exists $opt{force_uuid_modified}) {
+   	     ($uuid, $modified) = @{ $opt{force_uuid_modified} };
+   	 } else {
+   	     ($uuid, $modified) = gen_uuid_and_modified();
+   	 }
+
+
    	foreach(@standard_opf)   	 
    		 {
    			&umekomi;   												 #
@@ -364,6 +374,10 @@ close(IN_SHOSI);
 #   			s/▼spineタグ印字位置▼/join "", @pre_print_spine/eg;   				 #環境変数から用意。古い書き方
 #			my $replacement = join "\n", @go_spine_list; 				# 改行で結合
 #			s/▼spineタグ印字位置▼/$replacement/g;
+
+		    s/●UUID●/$uuid/g;
+		    s/●作業日時●/$modified/g;
+
    		 }
    		 
    	@go_opf_chosha = ();											#opfに埋め込む著者情報の配列を初期化
@@ -750,6 +764,35 @@ sub umekomi {
 		close(PUT_NAVIG_LIST);
 
 	}
+
+# 						    ===========================================================================
+
+# ---- 生成専用：UUID(urn:uuid:...) と dcterms:modified(UTC) を返す ----
+use POSIX qw(strftime);
+
+sub gen_uuid_and_modified {
+    my $uuid = eval {
+        require Data::UUID;
+        my $ug = Data::UUID->new;
+        'urn:uuid:' . lc $ug->create_str();
+    } || do {
+        # フォールバック: 外部依存なし v4風
+        my @h = (0..9, 'a'..'f');
+        my $r = sub { join '', map { $h[int rand @h] } 1..$_[0] };
+        sprintf(
+            'urn:uuid:%s-%s-4%s-%s%s-%s',
+            $r->(8), $r->(4), $r->(3),
+            (qw(8 9 a b))[int rand 4], $r->(3),
+            $r->(12)
+        );
+    };
+
+    my $modified = strftime("%Y-%m-%dT%H:%M:%SZ", gmtime);  # UTC/Z
+
+    # 返却：配列 or ハッシュ、好きな方で。ここでは配列を採用
+    return ($uuid, $modified);
+}
+
 
 
 

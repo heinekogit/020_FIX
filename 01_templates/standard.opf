@@ -29,7 +29,7 @@
 <dc:language>ja</dc:language>
 
 <!-- ファイルid -->
-<dc:identifier id="bw-ecode">00000000-0000-0000-0000-000000000000</dc:identifier>
+<dc:identifier id="bw-ecode">●UUID●</dc:identifier>
 
 <!-- 更新日 -->
 <meta property="dcterms:modified">●作業日時●</meta>
